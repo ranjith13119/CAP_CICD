@@ -1,69 +1,127 @@
-## Generated mta.yaml based on template version 0.4.0
-## appName = test
-## language=nodejs; multitenant=false
-## approuter=
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: test
+description: A simple CAP project.
 version: 1.0.0
-description: "A simple CAP project."
+modules:
+- name: test-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: test-db
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+  build-parameters:
+    builder: npm-ci
+- name: test-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: test-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: test-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: test-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - ovp.zip
+      name: ovp
+      target-path: resources/
+    - artifacts:
+      - capovpovp1.zip
+      name: capovpovp1
+      target-path: resources/
+    - artifacts:
+      - capfeovpes5ovp.zip
+      name: capfeovpes5ovp
+      target-path: resources/
+- name: ovp
+  type: html5
+  path: app/ovp
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: capovpovp1
+  type: html5
+  path: app/ovp_1
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: capfeovpes5ovp
+  type: html5
+  path: app/es5_ovp
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: test-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+  properties:
+    hdi-service-name: ${service-name}
+- name: cap-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      tenant-mode: dedicated
+      xsappname: cap-${space}
+    path: ./xs-security.json
+    service: xsuaa
+    service-plan: application
+- name: test-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: test-html5-srv
+    service-plan: app-host
+- name: test-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: false
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: test-dest-srv
+    service-plan: lite
 parameters:
+  deploy_mode: html5-repo
   enable-parallel-deployments: true
-   
 build-parameters:
   before-all:
-   - builder: custom
-     commands:
-      - npm ci
-      - npx -p @sap/cds-dk cds build --production
-
-modules:
- # --------------------- SERVER MODULE ------------------------
- - name: test-srv
- # ------------------------------------------------------------
-   type: nodejs
-   path: gen/srv
-   parameters:
-     buildpack: nodejs_buildpack
-   build-parameters:
-     builder: npm-ci
-   requires:
-    # Resources extracted from CAP configuration
-    - name: test-db
-   provides:
-    - name: srv-api      # required by consumers of CAP services (e.g. approuter)
-      properties:
-        srv-url: ${default-url}
-
- # -------------------- SIDECAR MODULE ------------------------
- - name: test-db-deployer
- # ------------------------------------------------------------
-   type: hdb
-   path: gen/db  
-   parameters:
-     buildpack: nodejs_buildpack
-   requires:
-    # 'hana' and 'xsuaa' resources extracted from CAP configuration
-    - name: test-db
-
-
-resources:
- # services extracted from CAP configuration
- # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
-# ------------------------------------------------------------
- - name: test-db
-# ------------------------------------------------------------
-   type: com.sap.xs.hdi-container
-   parameters:
-     service: hana  # or 'hanatrial' on trial landscapes
-     service-plan: hdi-shared
-   properties:
-     hdi-service-name: ${service-name}
- - name: cap-uaa
-   type: org.cloudfoundry.managed-service
-   parameters:
-     service-plan: application
-     service: xsuaa
-     path: ./xs-security.json
-     config:
-        xsappname: 'cap-${space}'
-        tenant-mode: dedicated
+  - builder: custom
+    commands:
+    - npm ci
+    - npx -p @sap/cds-dk cds build --production

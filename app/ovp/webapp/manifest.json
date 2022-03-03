@@ -1,0 +1,187 @@
+{
+    "_version": "1.32.0",
+    "sap.app": {
+        "id": "ovp",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "tags": {
+            "keywords": []
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/V2/Northwind/Northwind.svc/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            },
+            "Products": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/Products.xml",
+                "settings": {
+                    "localUri": "annotations/Products.xml"
+                }
+            },
+            "Product_Sales_for_1997": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/Product_Sales_for_1997.xml",
+                "settings": {
+                    "localUri": "annotations/Product_Sales_for_1997.xml"
+                }
+            }
+        },
+        "offline": false,
+        "sourceTemplate": {
+            "id": "OVP.smartovptemplate",
+            "version": "1.41.1"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_belize"
+        ]
+    },
+    "sap.ui5": {
+        "resources": {
+            "js": [],
+            "css": []
+        },
+        "dependencies": {
+            "minUI5Version": "1.98.0",
+            "libs": {
+                "sap.ovp": {}
+            },
+            "components": {}
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties",
+                "preload": false
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "mainService": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultCountMode": "Inline"
+                }
+            }
+        },
+        "extends": {
+            "extensions": {}
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "analytical"
+    },
+    "sap.ovp": {
+        "globalFilterModel": "mainService",
+        "globalFilterEntityType": "Product",
+        "containerLayout": "fixed",
+        "enableLiveFilter": false,
+        "considerAnalyticalParameters": false,
+        "showDateInRelativeFormat": true,
+        "useDateRangeType": true,
+        "smartVariantRequired": true,
+        "cards": {
+            "card00": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.linklist",
+                "settings": {
+                    "title": "{{card07_title}}",
+                    "subTitle": "{{card07_subTitle}}",
+                    "targetUri": "https://en.wikipedia.org/wiki/Mangalyaan_2",
+                    "listFlavor": "standard",
+                    "defaultSpan": {
+                        "rows": 5,
+                        "cols": 1
+                    },
+                    "staticContent": [
+                        {
+                            "title": "Create Supplier",
+                            "imageUri": "sap-icon://add-contact",
+                            "imageAltText": "Create Supplier",
+                            "targetUri": "https://mail.tcs.com",
+                            "openInNewWindow": true
+                        },
+                        {
+                            "title": "Create Purchase Order",
+                            "imageUri": "sap-icon://sales-document",
+                            "imageAltText": "Create Purchase Order",
+                            "targetUri": "https://mail.tcs.com",
+                            "openInNewWindow": true
+                        },
+                        {
+                            "title": "Manage Purchase Orders",
+                            "imageUri": "sap-icon://sales-order-item",
+                            "imageAltText": "Manage Purchase Orders",
+                            "targetUri": "https://mail.tcs.com",
+                            "openInNewWindow": true
+                        },
+                        {
+                            "title": "Manage Purchase Requisitions",
+                            "imageUri": "sap-icon://list",
+                            "imageAltText": "Manage Purchase Requisitions",
+                            "targetUri": "https://mail.tcs.com",
+                            "openInNewWindow": true
+                        },
+                        {
+                            "title": "Create Contract",
+                            "imageUri": "sap-icon://credit-card",
+                            "imageAltText": "Create Contract",
+                            "targetUri": "https://mail.tcs.com",
+                            "openInNewWindow": true
+                        },
+                        {
+                            "title": "Create Purchase Requisition",
+                            "imageUri": "sap-icon://create-form",
+                            "imageAltText": "Create Purchase Requisition",
+                            "targetUri": "https://mail.tcs.com",
+                            "openInNewWindow": true
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

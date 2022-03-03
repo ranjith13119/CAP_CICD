@@ -1,0 +1,308 @@
+{
+    "_version": "1.32.0",
+    "sap.app": {
+        "id": "cap.ovp.ovp1",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "tags": {
+            "keywords": []
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/V2/Northwind/Northwind.svc/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        },
+        "offline": false,
+        "sourceTemplate": {
+            "id": "OVP.smartovptemplate",
+            "version": "1.41.1"
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "cap-ovp-ovp1-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "ovp",
+                    "action": "display",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_belize"
+        ]
+    },
+    "sap.ui5": {
+        "resources": {
+            "js": [],
+            "css": []
+        },
+        "dependencies": {
+            "minUI5Version": "1.98.0",
+            "libs": {
+                "sap.ovp": {}
+            },
+            "components": {}
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties",
+                "preload": false
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "mainService": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultCountMode": "Inline"
+                }
+            }
+        },
+        "extends": {
+            "extensions": {}
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "analytical"
+    },
+    "sap.ovp": {
+        "globalFilterModel": "mainService",
+        "globalFilterEntityType": "Product",
+        "containerLayout": "fixed",
+        "enableLiveFilter": false,
+        "considerAnalyticalParameters": false,
+        "showDateInRelativeFormat": true,
+        "useDateRangeType": true,
+        "smartVariantRequired": true,
+        "cards": {
+            "card00": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.stack",
+                "settings": {
+                    "title": "{{card07_title}}",
+                    "subTitle": "{{card07_subTitle}}",
+                    "entitySet": "Products",
+                    "addODataSelect": false,
+                    "objectStreamCardsSettings": {
+                        "annotationPath": "com.sap.vocabularies.UI.v1.Facets#stack"
+                    },
+                    "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification#header,com.sap.vocabularies.UI.v1.Identification#card"
+                }
+            },
+            "card01": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.linklist",
+                "settings": {
+                    "title": "{{card06_title}}",
+                    "subTitle": "{{card06_subTitle}}",
+                    "targetUri": "https://en.wikipedia.org/wiki/Mangalyaan_2",
+                    "listFlavor": "standard",
+                    "defaultSpan": {
+                        "rows": 5,
+                        "cols": 1
+                    },
+                    "staticContent": [
+                        {
+                            "title": "Create Supplier",
+                            "imageUri": "sap-icon://add-contact",
+                            "imageAltText": "Create Supplier",
+                            "targetUri": "https://mail.tcs.com",
+                            "openInNewWindow": true
+                        },
+                        {
+                            "title": "Create Purchase Order",
+                            "imageUri": "sap-icon://sales-document",
+                            "imageAltText": "Create Purchase Order",
+                            "targetUri": "https://mail.tcs.com",
+                            "openInNewWindow": true
+                        },
+                        {
+                            "title": "Manage Purchase Orders",
+                            "imageUri": "sap-icon://sales-order-item",
+                            "imageAltText": "Manage Purchase Orders",
+                            "targetUri": "https://mail.tcs.com",
+                            "openInNewWindow": true
+                        },
+                        {
+                            "title": "Manage Purchase Requisitions",
+                            "imageUri": "sap-icon://list",
+                            "imageAltText": "Manage Purchase Requisitions",
+                            "targetUri": "https://mail.tcs.com",
+                            "openInNewWindow": true
+                        },
+                        {
+                            "title": "Create Contract",
+                            "imageUri": "sap-icon://credit-card",
+                            "imageAltText": "Create Contract",
+                            "targetUri": "https://mail.tcs.com",
+                            "openInNewWindow": true
+                        },
+                        {
+                            "title": "Create Purchase Requisition",
+                            "imageUri": "sap-icon://create-form",
+                            "imageAltText": "Create Purchase Requisition",
+                            "targetUri": "https://mail.tcs.com",
+                            "openInNewWindow": true
+                        }
+                    ]
+                }
+            },            
+            "card02": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.charts.analytical",
+                "settings": {
+                    "title": "{{card10_title}}",
+                    "subTitle": "{{card10_subTitle}}",
+                    "entitySet": "Product_Sales_for_1997",
+                    "kpiAnnotationPath": "com.sap.vocabularies.UI.v1.KPI#donutKPI",
+                    "navigation": "dataPointNav"
+                }
+            },
+            "card03": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.list",
+                "settings": {
+                    "title": "{{card05_title}}",
+                    "subTitle": "{{card05_subTitle}}",
+                    "listType": "condensed",
+                    "listFlavor": "bar",
+                    "sortBy": "UnitsInStock",
+                    "sortOrder": "ascending",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#Top5OutOfStock",
+                    "entitySet": "Products_by_Categories"
+                }
+            },
+            "card04": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.list",
+                "settings": {
+                    "title": "{{card01_title}}",
+                    "subTitle": "{{card01_subTitle}}",
+                    "entitySet": "Products",
+                    "listType": "extended",
+                    "listFlavor": "bar",
+                    "sortBy": "ReorderLevel",
+                    "sortOrder": "ascending",
+                    "addODataSelect": false,
+                    "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#TopReorderProducts",
+                    "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#KPI",
+                    "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification#urlbasedNavigation",
+                    "valueSelectionInfo": "{{card04_value}}",
+                    "showSortingInHeader": true,
+                    "showFilterInHeader": true,
+                    "stopResizing": true
+                }
+            },
+            "card05": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.list",
+                "settings": {
+                    "title": "{{card04_title}}",
+                    "subTitle": "{{card04_subTitle}}",
+                    "entitySet": "Invoices",
+                    "listType": "condensed",
+                    "listFlavor": "standard",
+                    "sortBy": "ExtendedPrice",
+                    "sortOrder": "descending",
+                    "addODataSelect": false,
+                    "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#Top5Invoices",
+                    "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#line",
+                    "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification#productHeader1",
+                    "valueSelectionInfo": "{{card04_value}}",
+                    "showSortingInHeader": true,
+                    "showFilterInHeader": true,
+                    "defaultSpan": {
+                        "rows": 5,
+                        "cols": 1
+                    }
+                }
+            },
+            "card06": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.table",
+                "settings": {
+                    "title": "{{card03_title}}",
+                    "entitySet": "Category_Sales_for_1997",
+                    "addODataSelect": false,
+                    "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#SalesDetails"
+                }
+            },
+            "card07": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.table",
+                "settings": {
+                    "title": "{{card02_title}}",
+                    "subTitle": "{{card02_subTitle}}",
+                    "entitySet": "Customers",
+                    "addODataSelect": false,
+                    "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#northwind_Table_customers"
+                }
+            },
+            "card08": {
+                "model": "mainService",
+                "template": "sap.ovp.cards.list",
+                "settings": {
+                    "title": "{{card00_title}}",
+                    "subTitle": "{{card00_subTitle}}",
+                    "entitySet": "Employees",
+                    "addODataSelect": false,
+                    "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#Top5Employees",
+                    "listType": "extended",
+                    "listFlavor": "standard",
+                    "sortBy": "HireDate",
+                    "sortOrder": "ascending"
+                }
+            }
+        }
+    }
+}

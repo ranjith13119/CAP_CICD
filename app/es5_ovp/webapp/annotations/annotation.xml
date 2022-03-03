@@ -1,0 +1,343 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common" />
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI" />
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication" />
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwbep/GWSAMPLE_BASIC/$metadata">
+        <edmx:Include Namespace="GWSAMPLE_BASIC" />
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="cap.fe.ovp">
+            <Annotations Target="GWSAMPLE_BASIC.Product">
+                <Annotation Term="UI.Identification" Qualifier="productHeader2">
+                    <Collection>
+                        <Record Type="UI.DataFieldWithUrl">
+                            <PropertyValue Property="Url" String="www.google.com" />
+                            <PropertyValue Property="Value" Path="ProductID" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.Identification" Qualifier="productHeader1">
+                    <Collection>
+                        <Record Type="UI.DataFieldForIntentBasedNavigation">
+                            <PropertyValue Property="SemanticObject" String="Action" />
+                            <PropertyValue Property="Action" String="toappnavsample" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="com.sap.vocabularies.Communication.v1.Contact">
+                    <Record>
+                        <PropertyValue Property="fn" Path="ProductID" />
+                        <PropertyValue Property="title" Path="Name" />
+                        <PropertyValue Property="org" Path="Description" />
+                        <PropertyValue Property="role" Path="Description" />
+                        <!-- <PropertyValue Property="photo" Path="Photo" />-->
+                        <PropertyValue Property="tel">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="type" EnumMember="com.sap.vocabularies.Communication.v1.PhoneType/fax" />
+                                    <PropertyValue Property="uri" Path="Name" />
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="type" EnumMember="com.sap.vocabularies.Communication.v1.PhoneType/work Communication.PhoneType/preferred" />
+                                    <PropertyValue Property="uri" Path="Name" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="email">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="type" EnumMember="Communication.ContactInformationType/work Communication.ContactInformationType/preferred" />
+                                    <PropertyValue Property="address" Path="SupplierID" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="com.sap.vocabularies.UI.v1.HeaderInfo" Qualifier="header1">
+                    <Record Type="com.sap.vocabularies.UI.v1.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="Product" />
+                        <PropertyValue Property="TypeNamePlural" String="Products" />
+                        <PropertyValue Property="Title">
+                            <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                                <PropertyValue Property="Label" String="{@i18n&gt;PRODUCTID}" />
+                                <PropertyValue Property="Value" Path="Name" />
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Description">
+                            <Record Type="com.sap.vocabularies.UI.v1.DataField">
+                                <PropertyValue Property="Label" String="Product Description" />
+                                <PropertyValue Property="Value" Path="Description" />
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeImageUrl" Path="Name" />
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="price">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Title" String="{@i18n&gt;PRICE}" />
+                        <PropertyValue Property="Value" Path="Price" />
+                        <PropertyValue Property="ValueFormat">
+                            <Record Type="UI.NumberFormat">
+                                <PropertyValue Property="NumberOfFractionalDigits" Int="1" />
+                                <PropertyValue Property="ScaleFactor" Decimal="3" />
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ProductID" />
+                            <PropertyValue Property="Label" String="{@i18n&gt;PRODUCT_ID}" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Name" />
+                            <PropertyValue Property="Label" String="{@i18n&gt;PRODUCT_NAME}" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Category" />
+                            <PropertyValue Property="Label" String="{@i18n&gt;CATEGORY}" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SupplierName" />
+                            <PropertyValue Property="Label" String="{@i18n&gt;SUPPLIER_NAME}" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Description" />
+                            <PropertyValue Property="Label" String="{@i18n&gt;DESCRIPTION}" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TypeCode" />
+                            <PropertyValue Property="Label" String="{@i18n&gt;TYPE_CODE}" />
+                        </Record>
+                        <Record Type="UI.DataFieldForAnnotation">
+                            <PropertyValue Property="Label" String="{@i18n&gt;PRICE}" />
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#price" />
+                            <Annotation EnumMember="com.sap.vocabularies.UI.v1.ImportanceType/High" Term="com.sap.vocabularies.UI.v1.Importance" />
+                        </Record>
+                        <Record Type="UI.DataFieldForIntentBasedNavigation">
+                            <PropertyValue Property="SemanticObject" String="Action" />
+                            <PropertyValue Property="Action" String="toappnavsample2" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="#list">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="ProductID"/>
+                        <PropertyValue Property="Title" String="ProductId"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="chart">
+                    <Record>
+                        <PropertyValue Property="Title" String="Sales Details"/>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="Price"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="ProductID"/>
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+                        <PropertyValue Property="Description" String="REPLACE_WITH_CHART_DESC"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant" Qualifier="chartPrest">
+                    <Record>
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#chart</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="ProductID"/>
+                                    <PropertyValue Property="Descending" Bool="true"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MaxItems" Int="5"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="GWSAMPLE_BASIC.SalesOrder">
+                <Annotation Term="UI.Identification" Qualifier="card">
+                    <Collection>
+                        <Record Type="UI.DataFieldForAction">
+                            <PropertyValue Property="Action" String="GWSAMPLE_BASIC.GWSAMPLE_BASIC_Entities/SalesOrder_Confirm" />
+                        </Record>
+                        <Record Type="UI.DataFieldForAction">
+                            <PropertyValue Property="Action" String="GWSAMPLE_BASIC.GWSAMPLE_BASIC_Entities/SalesOrder_Cancel" />
+                            <PropertyValue Property="Label" String="{@i18n&gt;APPROVE}" />
+                        </Record>
+                        <Record Type="UI.DataFieldForIntentBasedNavigation">
+                            <PropertyValue Property="SemanticObject" String="Action" />
+                            <PropertyValue Property="Action" String="toappnavsample" />
+                            <PropertyValue Property="Label" String="{@i18n&gt;REJECT}" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.Identification" Qualifier="header">
+                    <Collection>
+                        <Record Type="UI.DataFieldForIntentBasedNavigation">
+                            <PropertyValue Property="SemanticObject" String="Action" />
+                            <PropertyValue Property="Action" String="toappnavsample" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="{@i18n&gt;SALES_ORDER}" />
+                        <PropertyValue Property="TypeNamePlural" String="{@i18n&gt;SALES_ORDERS}" />
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="SalesOrderID" />
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="ImageUrl" String="sap-icon://sales-order" />
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="NetAmount" />
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="group2">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="CustomerID" />
+                                    <PropertyValue Property="Label" String="{@i18n&gt;CUSTOMER_ID}" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="CustomerName" />
+                                    <PropertyValue Property="Label" String="{@i18n&gt;CUSTOMER_NAME}" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="group1">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="SalesOrderID" />
+                                    <PropertyValue Property="Label" String="{@i18n&gt;CUSTOMER_ID}" />
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="GrossAmount" />
+                                    <PropertyValue Property="Label" String="{@i18n&gt;CUSTOMER_ID}" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="com.sap.vocabularies.UI.v1.Facets" Qualifier="stack">
+                    <Collection>
+                        <Record Type="com.sap.vocabularies.UI.v1.ReferenceFacet">
+                            <Annotation Term="com.sap.vocabularies.UI.v1.IsSummary" />
+                            <PropertyValue Property="Label" String="Note" />
+                            <PropertyValue Property="Target" AnnotationPath="@com.sap.vocabularies.UI.v1.FieldGroup#group1" />
+                        </Record>
+                        <Record Type="com.sap.vocabularies.UI.v1.ReferenceFacet">
+                            <Annotation Term="com.sap.vocabularies.UI.v1.IsSummary" />
+                            <PropertyValue Property="Label" String="Note1" />
+                            <PropertyValue Property="Target" AnnotationPath="@com.sap.vocabularies.UI.v1.FieldGroup#group2" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="header">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Title" String="{@i18n&gt;TOTAL_SALES}" />
+                        <PropertyValue Property="Value" Path="GrossAmount" />
+                        <PropertyValue Property="CriticalityCalculation">
+                            <Record Type="UI.CriticalityCalculationType">
+                                <PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize" />
+                                <PropertyValue Property="ToleranceRangeLowValue" String="3000" />
+                                <PropertyValue Property="DeviationRangeLowValue" String="4000" />
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TrendCalculation">
+                            <Record Type="UI.TrendCalculationType">
+                                <PropertyValue Property="ReferenceValue" String="15000" />
+                                <PropertyValue Property="UpDifference" Decimal="5000" />
+                                <PropertyValue Property="StrongUpDifference" Decimal="10000" />
+                                <PropertyValue Property="DownDifference" Decimal="1000" />
+                                <PropertyValue Property="StrongDownDifference" Decimal="2000" />
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SalesOrderID" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CustomerName" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="GrossAmount" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="status">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Positive"/>
+                        <PropertyValue Property="Value" Path="DeliveryStatus"/>
+                        <PropertyValue Property="Title" String="Status"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem" Qualifier="SalesList">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SalesOrderID"/>
+                            <PropertyValue Property="Label" String="Sales Order Id"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionVariant" Qualifier="hi">
+                    <Record>
+                        <PropertyValue Property="SelectOptions">
+                            <Collection>
+                                <Record Type="UI.SelectOptionType">
+                                    <PropertyValue Property="PropertyName" PropertyPath="CustomerID"/>
+                                    <PropertyValue Property="Ranges">
+                                        <Collection>
+                                            <Record Type="UI.SelectionRangeType">
+                                                <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+                                                <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+                                                <PropertyValue Property="Low" String="hi"/>
+                                            </Record>
+                                        </Collection>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="GWSAMPLE_BASIC.Product/ProductID">
+                <Annotation Term="Common.SemanticObject" String="Action" />
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

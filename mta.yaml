@@ -75,6 +75,35 @@ modules:
     - npm install
     - npm run build:cf
     supported-platforms: []
+- name: test-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: test-dest-srv
+    parameters:
+      content-target: true
+  - name: test-repo-host
+    parameters:
+      service-key:
+        name: test-repo-host-key
+  - name: cap-uaa
+    parameters:
+      service-key:
+        name: cap-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: cap_cicd_test_repo_host
+          ServiceInstanceName: test-html5-srv
+          ServiceKeyName: test-repo-host-key
+          sap.cloud.service: cap.cicd
+        - Authentication: OAuth2UserTokenExchange
+          Name: cap_cicd_cap_uaa
+          ServiceKeyName: cap-uaa-key
+          sap.cloud.service: cap.cicd
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
 resources:
 - name: test-db
   type: com.sap.xs.hdi-container
